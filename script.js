@@ -23,6 +23,7 @@ addFoodForm.addEventListener('submit', (event) => {
 
 function renderFoodList() {
   foodArrayList.forEach((foodItem) => {
+    foodList.innerHTML = ''
     const listItem = document.createElement('li');
     listItem.classList.add('food-item');
     listItem.innerHTML = `<span>${foodItem.name}</span>
