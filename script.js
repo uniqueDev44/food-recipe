@@ -23,11 +23,11 @@ addFoodForm.addEventListener('submit', (event) => {
 
 function renderFoodList() {
   foodArrayList.forEach((foodItem) => {
-    foodList.innerHTML = ''
+    foodList.innerHTML = '';
     const listItem = document.createElement('li');
     listItem.classList.add('food-item');
     listItem.innerHTML = `<span>${foodItem.name}</span>
-    <span>Expires: ${foodItem.expiry}</span>`
+    <span>Expires: ${foodItem.expiry}</span> <button class="delete-btn">Delete</button>`;
     foodList.appendChild(listItem);
   })
 }
