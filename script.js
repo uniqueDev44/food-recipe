@@ -18,24 +18,30 @@ addFoodForm.addEventListener('submit', (event) => {
 
   foodArrayList.push(foodItem);
   console.log(foodArrayList);
+  foodNameInput.value = '';
+  expiryDateInput.value = '';
   renderFoodList();
 })
 
 function renderFoodList() {
-  foodArrayList.forEach((foodItem, index) => {
-    foodList.innerHTML = '';
-    const listItem = document.createElement('li');
-    listItem.classList.add('food-item');
-    listItem.innerHTML = `<span>${foodItem.name}</span>
-    <span>Expires: ${foodItem.expiry}</span> <button class="delete-btn">Delete</button>`;
-    listItem.querySelector('.delete-btn')
-      .addEventListener('click', () => {
-        console.log('Delete button clicked for index:', index);
-        foodArrayList.splice(index, 1);
-        document.querySelector('.food-item').remove();
-        renderFoodList();
-      })
-    foodList.appendChild(listItem);
+  let foodListHtml = '';
+  foodArrayList.forEach((foodItem) => {
+    foodListHtml = `<li class="food-list"><span>${foodItem.name}</span>
+    <span>Expires: ${foodItem.expiry}</span> <button class="delete-btn">Delete</button></li>`; 
+
   })
+  foodList.innerHTML += foodListHtml;
+  deleteFoodItem();
+  
+}
+
+function deleteFoodItem() {
+  document.querySelectorAll('.delete-btn')
+    .forEach((button, index) => {
+      button.addEventListener('click', () => {
+        foodArrayList.splice(index, 1);
+        document.querySelector('.food-list').removeChild(button.parentElement);
+      })
+    })
 }
 
