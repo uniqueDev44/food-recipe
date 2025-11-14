@@ -22,12 +22,19 @@ addFoodForm.addEventListener('submit', (event) => {
 })
 
 function renderFoodList() {
-  foodArrayList.forEach((foodItem) => {
+  foodArrayList.forEach((foodItem, index) => {
     foodList.innerHTML = '';
     const listItem = document.createElement('li');
     listItem.classList.add('food-item');
     listItem.innerHTML = `<span>${foodItem.name}</span>
     <span>Expires: ${foodItem.expiry}</span> <button class="delete-btn">Delete</button>`;
+    listItem.querySelector('.delete-btn')
+      .addEventListener('click', () => {
+        console.log('Delete button clicked for index:', index);
+        foodArrayList.splice(index, 1);
+        document.querySelector('.food-item').remove();
+        renderFoodList();
+      })
     foodList.appendChild(listItem);
   })
 }
